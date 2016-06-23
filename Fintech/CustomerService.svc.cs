@@ -19,6 +19,7 @@ namespace Fintech
             {
                 context.Users.Add(newUser);
                 context.SaveChanges();
+  
                 return "OK";
             }
             catch(Exception ex)
