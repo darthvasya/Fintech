@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-
-namespace Fintech.User
+namespace Fintech
 {
     [DataContract]
     public class User
@@ -21,7 +20,7 @@ namespace Fintech.User
         public string password { get; set; }
 
         [DataMember]
-        public int cardNumber { get; set; }
+        public string cardNumber { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using Fintech.User;
+ 
 using System.Text;
 
 namespace Fintech
@@ -28,7 +28,7 @@ namespace Fintech
                                     RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
                                     UriTemplate = "AddUser/")]
-        string AddNewUser(User.User newUser);
+        string AddNewUser(Users newUser);
 
     }
 }

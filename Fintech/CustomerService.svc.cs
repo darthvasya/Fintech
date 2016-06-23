@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using Fintech.User;
+ 
 
 namespace Fintech
 {
@@ -13,10 +13,20 @@ namespace Fintech
     public class CustomerService : ICustomerService
     {
         DB_9FFBF4_FintechEntities context = new DB_9FFBF4_FintechEntities();
-        public string AddNewUser(User.User newUser)
+        public string AddNewUser(Users newUser)
         {
-            //context
-            return "OK";
+            try
+            {
+                context.Users.Add(newUser);
+                context.SaveChanges();
+                return "OK";
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
+            
+            
         }
 
         public string DoWork()
