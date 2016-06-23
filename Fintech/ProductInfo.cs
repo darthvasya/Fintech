@@ -12,11 +12,14 @@ namespace Fintech
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class ProductInfo
     {
-        public int uid { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
-        public int cardNumber { get; set; }
+        public int Id { get; set; }
+        public int IdObject { get; set; }
+        public Nullable<int> IdCategory { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public byte[] Image { get; set; }
+        public string Description { get; set; }
     }
 }

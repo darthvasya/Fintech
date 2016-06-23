@@ -25,6 +25,10 @@ namespace Fintech
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CategoryInfo> CategoryInfo { get; set; }
+        public virtual DbSet<ObjectInfo> ObjectInfo { get; set; }
+        public virtual DbSet<OrderInfo> OrderInfo { get; set; }
+        public virtual DbSet<ProductInfo> ProductInfo { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

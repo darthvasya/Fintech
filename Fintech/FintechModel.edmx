@@ -4,50 +4,311 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_9FFBF4_FintechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_9FFBF4_FintechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9FFBF4_Fintech.dbo.CategoryInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CategoryInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdObject" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdObject" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9FFBF4_Fintech.dbo.ObjectInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ObjectInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Card" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Card" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9FFBF4_Fintech.dbo.OrderInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrderInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdObject" />
+            <PropertyRef Name="IdsProducts" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Card" />
+            <PropertyRef Name="CreationTime" />
+            <PropertyRef Name="AcceptStatus" />
+            <PropertyRef Name="PaymentStatus" />
+            <PropertyRef Name="DeliveryStatus" />
+            <PropertyRef Name="DeliveryTime" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdObject" Type="int" Nullable="false" />
+          <Property Name="IdsProducts" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Card" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="AcceptStatus" Type="tinyint" Nullable="false" />
+          <Property Name="PaymentStatus" Type="tinyint" Nullable="false" />
+          <Property Name="DeliveryStatus" Type="tinyint" Nullable="false" />
+          <Property Name="DeliveryTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_9FFBF4_Fintech.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdObject" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdObject" Type="int" Nullable="false" />
+          <Property Name="IdCategory" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DB_9FFBF4_Fintech.dbo.Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="uid" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="cardNumber" />
           </Key>
           <Property Name="uid" Type="int" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cardNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DB_9FFBF4_FintechModelStoreContainer">
+          <EntitySet Name="CategoryInfo" EntityType="Self.CategoryInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CategoryInfo].[Id] AS [Id], 
+    [CategoryInfo].[IdObject] AS [IdObject], 
+    [CategoryInfo].[Name] AS [Name], 
+    [CategoryInfo].[Image] AS [Image], 
+    [CategoryInfo].[Description] AS [Description]
+    FROM [dbo].[CategoryInfo] AS [CategoryInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ObjectInfo" EntityType="Self.ObjectInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ObjectInfo].[Id] AS [Id], 
+    [ObjectInfo].[Card] AS [Card], 
+    [ObjectInfo].[Password] AS [Password], 
+    [ObjectInfo].[Name] AS [Name], 
+    [ObjectInfo].[Image] AS [Image], 
+    [ObjectInfo].[Address] AS [Address], 
+    [ObjectInfo].[Description] AS [Description]
+    FROM [dbo].[ObjectInfo] AS [ObjectInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderInfo" EntityType="Self.OrderInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrderInfo].[Id] AS [Id], 
+    [OrderInfo].[IdObject] AS [IdObject], 
+    [OrderInfo].[IdsProducts] AS [IdsProducts], 
+    [OrderInfo].[Price] AS [Price], 
+    [OrderInfo].[Currency] AS [Currency], 
+    [OrderInfo].[Card] AS [Card], 
+    [OrderInfo].[CreationTime] AS [CreationTime], 
+    [OrderInfo].[AcceptStatus] AS [AcceptStatus], 
+    [OrderInfo].[PaymentStatus] AS [PaymentStatus], 
+    [OrderInfo].[DeliveryStatus] AS [DeliveryStatus], 
+    [OrderInfo].[DeliveryTime] AS [DeliveryTime]
+    FROM [dbo].[OrderInfo] AS [OrderInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductInfo].[Id] AS [Id], 
+    [ProductInfo].[IdObject] AS [IdObject], 
+    [ProductInfo].[IdCategory] AS [IdCategory], 
+    [ProductInfo].[Name] AS [Name], 
+    [ProductInfo].[Price] AS [Price], 
+    [ProductInfo].[Image] AS [Image], 
+    [ProductInfo].[Description] AS [Description]
+    FROM [dbo].[ProductInfo] AS [ProductInfo]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Users" EntityType="Self.Users" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Users].[uid] AS [uid], 
-    [Users].[name] AS [name]
+    [Users].[login] AS [login], 
+    [Users].[password] AS [password], 
+    [Users].[cardNumber] AS [cardNumber]
     FROM [dbo].[Users] AS [Users]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_9FFBF4_FintechModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB_9FFBF4_FintechEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryInfo" EntityType="DB_9FFBF4_FintechModel.CategoryInfo" />
+          <EntitySet Name="ObjectInfo" EntityType="DB_9FFBF4_FintechModel.ObjectInfo" />
+          <EntitySet Name="OrderInfo" EntityType="DB_9FFBF4_FintechModel.OrderInfo" />
+          <EntitySet Name="ProductInfo" EntityType="DB_9FFBF4_FintechModel.ProductInfo" />
+          <EntitySet Name="Users" EntityType="DB_9FFBF4_FintechModel.Users" />
+        </EntityContainer>
+        <EntityType Name="CategoryInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdObject" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdObject" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ObjectInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Card" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Card" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdObject" />
+            <PropertyRef Name="IdsProducts" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Card" />
+            <PropertyRef Name="CreationTime" />
+            <PropertyRef Name="AcceptStatus" />
+            <PropertyRef Name="PaymentStatus" />
+            <PropertyRef Name="DeliveryStatus" />
+            <PropertyRef Name="DeliveryTime" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdObject" Type="Int32" Nullable="false" />
+          <Property Name="IdsProducts" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Card" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AcceptStatus" Type="Byte" Nullable="false" />
+          <Property Name="PaymentStatus" Type="Byte" Nullable="false" />
+          <Property Name="DeliveryStatus" Type="Byte" Nullable="false" />
+          <Property Name="DeliveryTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdObject" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdObject" Type="Int32" Nullable="false" />
+          <Property Name="IdCategory" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="uid" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="cardNumber" />
           </Key>
           <Property Name="uid" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cardNumber" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="DB_9FFBF4_FintechEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Users" EntityType="Self.Users" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DB_9FFBF4_FintechModelStoreContainer" CdmEntityContainer="DB_9FFBF4_FintechEntities">
+          <EntitySetMapping Name="CategoryInfo">
+            <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.CategoryInfo">
+              <MappingFragment StoreEntitySet="CategoryInfo">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdObject" ColumnName="IdObject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjectInfo">
+            <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.ObjectInfo">
+              <MappingFragment StoreEntitySet="ObjectInfo">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Card" ColumnName="Card" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderInfo">
+            <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.OrderInfo">
+              <MappingFragment StoreEntitySet="OrderInfo">
+                <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+                <ScalarProperty Name="DeliveryStatus" ColumnName="DeliveryStatus" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="AcceptStatus" ColumnName="AcceptStatus" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Card" ColumnName="Card" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IdsProducts" ColumnName="IdsProducts" />
+                <ScalarProperty Name="IdObject" ColumnName="IdObject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInfo">
+            <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.ProductInfo">
+              <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="IdObject" ColumnName="IdObject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="uid" ColumnName="uid" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Fintech.User;
 
 namespace Fintech
 {
@@ -11,11 +12,18 @@ namespace Fintech
     // NOTE: In order to launch WCF Test Client for testing this service, please select CustomerService.svc or CustomerService.svc.cs at the Solution Explorer and start debugging.
     public class CustomerService : ICustomerService
     {
+        DB_9FFBF4_FintechEntities context = new DB_9FFBF4_FintechEntities();
+        public string AddNewUser(User.User newUser)
+        {
+            //context
+            return "OK";
+        }
+
         public string DoWork()
         {
             DB_9FFBF4_FintechEntities context = new DB_9FFBF4_FintechEntities();
-            string da = context.Users.Where(p => p.uid == 1).FirstOrDefault().name.ToString();
-            return "da" + da;
+            string da = context.Users.Where(p => p.uid == 1).FirstOrDefault().login.ToString();
+            return "da"+ da;
         }
     }
 }
