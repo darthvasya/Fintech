@@ -115,6 +115,7 @@
       <LastGenOutput>FintechModel.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="MarketService.svc" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Web.config" />
@@ -145,6 +146,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ICustomerService.cs" />
+    <Compile Include="IMarketService.cs" />
+    <Compile Include="MarketService.svc.cs">
+      <DependentUpon>MarketService.svc</DependentUpon>
+    </Compile>
     <Compile Include="ObjectInfo.cs">
       <DependentUpon>FintechModel.tt</DependentUpon>
     </Compile>
