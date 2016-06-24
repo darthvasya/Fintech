@@ -12,6 +12,37 @@ namespace Fintech
     public interface IMarketService
     {
         [OperationContract]
-        string DoWork();
+        string CreateObject(string card, string password, string name);
+
+        [OperationContract]
+        string CheckObject(string card, string password);
+
+        [OperationContract]
+        ObjectInfo GetObject(string card, string password);
+
+        [OperationContract]
+        string AddCategory(int IdObject, string Name, string Link, string Description);
+
+        [OperationContract]
+        string ChangeCategory(int Id, int IdObject, string Name, string Link, string Description);
+
+        [OperationContract]
+        string RemoveCategory(int Id, int IdObject);
+
+        [OperationContract]
+        List<CategoryInfo> GetAllCategory(int IdObject);
+
+        [OperationContract]
+        string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Link, string Description);
+
+        [OperationContract]
+        string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Link, string Description);
+
+        [OperationContract]
+        string RemoveProduct(int Id, int IdObject);
+
+        [OperationContract]
+        List<ProductInfo> GetAllProduct(int IdObject);
+
     }
 }

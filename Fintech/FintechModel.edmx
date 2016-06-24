@@ -59,8 +59,7 @@
           <Key>
             <PropertyRef Name="uid" />
           </Key>
-          <Property Name="uid" Type="int" Nullable="false" />
-          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cardNumber" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
@@ -136,8 +135,7 @@
           <Key>
             <PropertyRef Name="uid" />
           </Key>
-          <Property Name="uid" Type="Int32" Nullable="false" />
-          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cardNumber" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -206,7 +204,6 @@
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="uid" ColumnName="uid" />
               </MappingFragment>
             </EntityTypeMapping>

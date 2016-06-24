@@ -19,7 +19,7 @@ namespace Fintech
             {
                 context.Users.Add(newUser);
                 context.SaveChanges();
-                return "OK " + newUser.uid;
+                return  "OK";
             }
             catch(Exception ex)
             {
@@ -32,8 +32,25 @@ namespace Fintech
         public string DoWork()
         {
             DB_9FFBF4_FintechEntities context = new DB_9FFBF4_FintechEntities();
-            string da = context.Users.Where(p => p.uid == 1).FirstOrDefault().login.ToString();
+            string da = context.Users.Where(p => p.uid == 1).FirstOrDefault().cardNumber.ToString();
             return "da"+ da;
+        }
+
+ 
+
+        public string Login(LogInfo logInfo)
+        {
+            string pswd = logInfo.password;
+            string cardNumber = logInfo.cardNumber;
+            if (context.Users.Where(p => p.cardNumber == cardNumber).FirstOrDefault().password == pswd)
+            {
+                return "OK";
+            }
+            else
+            {
+                return "Error with login";
+            }
+
         }
     }
 }

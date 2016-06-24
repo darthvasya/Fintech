@@ -8,19 +8,12 @@ using System.Runtime.Serialization;
 namespace Fintech
 {
     [DataContract]
-    public class User
+    public class LogInfo
     {
-        [DataMember]
-        public int uid { get; set; }
-
-        [DataMember]
-        public string login { get; set; }
-
-        [DataMember]
-        public string password { get; set; }
-
         [DataMember]
         public string cardNumber { get; set; }
 
+        [DataMember]
+        public string password { get; set; }
     }
 }

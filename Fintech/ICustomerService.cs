@@ -30,5 +30,12 @@ namespace Fintech
                                     UriTemplate = "AddUser/")]
         string AddNewUser(Users newUser);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+                                    RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "login/")]
+        string Login(LogInfo logInfo);
+
     }
 }
