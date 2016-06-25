@@ -47,19 +47,70 @@ namespace Fintech
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
-                                    UriTemplate = "Shops/{id}")]
+                                    UriTemplate = "Shops/{id}/")]
         ShopInfo GetShopInfo(string id);
 
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
-                                    UriTemplate = "Cards/{id}")]
+                                    UriTemplate = "Cards/{id}/")]
         List<CardInfo> GetUserCards(string id);
 
-        /*[OperationContract]
+        [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
-                                    UriTemplate = "Shops/{shopId}/Goods/}")]
-        List<ProductInfo> GetShopGoods(string shopId);*/
+                                    UriTemplate = "Shops/{shopId}/Categories/")]
+        List<Category> GetShopCats(string shopId);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "Shops/{shopId}/Categories/{catId}/")]
+        List<Good> GetCatGoods(string shopId, string catId);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "Shops/{shopId}/Categories/{catId}/Goods/{goodId}/")]
+        Good GetGood(string shopId, string catId, string goodId);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+                                    RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "MakeOrder/")]
+        string MakeOrder(Order order);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+                                    RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "SayAboutOrderAcept/{orderId}/")]
+        void SayAboutOrderAccept(string orderId);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "GetCatNameById/{id}/")]
+        string GetCatNameById(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "GetShopList/")]
+        List<Shop> GetShopList();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+                                    RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "SayAboutGoodDelivery/{id}/")]
+        void SayAboutGoodDelivery(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "GetOrderStatus/{orderId}/{operationId}/")]
+        string GetOrderStatus(string orderId, string operationId);
     }
 }

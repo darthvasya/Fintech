@@ -16,14 +16,14 @@ namespace Fintech
     {
         public int Id { get; set; }
         public int IdObject { get; set; }
-        public string IdsProducts { get; set; }
+        public string GoodsId { get; set; }
         public decimal Price { get; set; }
         public string Currency { get; set; }
-        public string Card { get; set; }
-        public System.DateTime CreationTime { get; set; }
+        public int CardId { get; set; }
+        public string CreationTime { get; set; }
         public byte AcceptStatus { get; set; }
         public byte PaymentStatus { get; set; }
         public byte DeliveryStatus { get; set; }
-        public System.DateTime DeliveryTime { get; set; }
+        public string DeliveryTime { get; set; }
     }
 }

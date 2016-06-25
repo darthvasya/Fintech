@@ -33,6 +33,21 @@ namespace Fintech
             }
             return result;
         }
+        // ИНФОРМИРОВАНИЕ
+        static private List<int> OrderNewList = new List<int>();
+        static public void OrderNewAdd(int OrderId)
+        {
+            OrderNewList.Add(OrderId);
+        }
+        static public void OrderNewRemove(int OrderId)
+        {
+            for (int i = 0; i < OrderNewList.Count; i++)
+                if (OrderNewList[i] == OrderId)
+                {
+                    OrderNewList.RemoveAt(i);
+                    break;
+                }
+        }
 
     }
 }

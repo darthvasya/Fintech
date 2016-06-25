@@ -12,8 +12,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="uid" Type="int" Nullable="false" />
           <Property Name="cardNumber" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="validDate" Type="nvarchar" MaxLength="5" Nullable="false" />
           <Property Name="cardKey" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="validDate" Type="nvarchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="CategoryInfo">
           <Key>
@@ -51,15 +51,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdObject" Type="int" Nullable="false" />
-          <Property Name="IdsProducts" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GoodsId" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Currency" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="Card" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="CardId" Type="int" Nullable="false" />
+          <Property Name="CreationTime" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="AcceptStatus" Type="tinyint" Nullable="false" />
           <Property Name="PaymentStatus" Type="tinyint" Nullable="false" />
           <Property Name="DeliveryStatus" Type="tinyint" Nullable="false" />
-          <Property Name="DeliveryTime" Type="datetime" Nullable="false" />
+          <Property Name="DeliveryTime" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInfo">
           <Key>
@@ -176,7 +176,7 @@
           <EntitySet Name="ProductInfo" EntityType="DB_9FFBF4_FintechModel.ProductInfo" />
           <EntitySet Name="sysdiagrams" EntityType="DB_9FFBF4_FintechModel.sysdiagrams" />
           <EntitySet Name="Users" EntityType="DB_9FFBF4_FintechModel.Users" />
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -195,8 +195,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="uid" Type="Int32" Nullable="false" />
           <Property Name="cardNumber" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="validDate" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="cardKey" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="validDate" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CategoryInfo">
           <Key>
@@ -234,15 +234,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdObject" Type="Int32" Nullable="false" />
-          <Property Name="IdsProducts" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GoodsId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Currency" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="Card" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CardId" Type="Int32" Nullable="false" />
+          <Property Name="CreationTime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="AcceptStatus" Type="Byte" Nullable="false" />
           <Property Name="PaymentStatus" Type="Byte" Nullable="false" />
           <Property Name="DeliveryStatus" Type="Byte" Nullable="false" />
-          <Property Name="DeliveryTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeliveryTime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductInfo">
           <Key>
@@ -308,8 +308,8 @@
           <EntitySetMapping Name="Cards">
             <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.Cards">
               <MappingFragment StoreEntitySet="Cards">
-                <ScalarProperty Name="cardKey" ColumnName="cardKey" />
                 <ScalarProperty Name="validDate" ColumnName="validDate" />
+                <ScalarProperty Name="cardKey" ColumnName="cardKey" />
                 <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
                 <ScalarProperty Name="uid" ColumnName="uid" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -357,10 +357,10 @@
                 <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
                 <ScalarProperty Name="AcceptStatus" ColumnName="AcceptStatus" />
                 <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
-                <ScalarProperty Name="Card" ColumnName="Card" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="IdsProducts" ColumnName="IdsProducts" />
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
                 <ScalarProperty Name="IdObject" ColumnName="IdObject" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

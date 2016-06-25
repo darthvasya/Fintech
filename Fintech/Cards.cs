@@ -17,7 +17,7 @@ namespace Fintech
         public int id { get; set; }
         public int uid { get; set; }
         public string cardNumber { get; set; }
-        public string validDate { get; set; }
         public string cardKey { get; set; }
+        public string validDate { get; set; }
     }
 }

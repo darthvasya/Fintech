@@ -5,6 +5,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
+using System.IO;
+using System.Net.Sockets;
+
 namespace Fintech
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "MarketService" in code, svc and config file together.
@@ -225,6 +228,37 @@ namespace Fintech
         }
 
 
-
+        // ЗАГРУЗКА ФОТО
+        public string LoadImage(int Id, byte[] Buffer, string Extension)
+        {
+            string result = "Неизвестная ошибка.";
+            if (Extension == "jpg" || Extension == "jpeg" || Extension == "png")
+            {
+                try
+                {
+                    Image Img = null;
+                    if (Id >= 0)
+                    {
+                        Img = context.Image.Where(p => p.Id == Id).FirstOrDefault();
+                    }
+                    if (Img == null)
+                    { // создаём
+                        Img = new Image();
+                        int ImageId = 1; try { ImageId = context.Image.LastOrDefault().Id + 1; } catch { }
+                        Img.ImageString = "\\ImageStorage\\" + ImageId + "." + Extension;
+                        Img.Ext = Extension;
+                        context.Image.Add(Img);
+                        context.SaveChanges();
+                    }
+                    // путь
+                    if (Directory.Exists("\\ImageStorage") == false) { Directory.CreateDirectory("\\ImageStorage"); }
+                    // создаём файл
+                    File.WriteAllBytes(Img.ImageString, Buffer);
+                    result = "ok";
+                }
+                catch (Exception E) { result = E.Message; }
+            }
+            return result;
+        }
     }
 }

@@ -47,5 +47,8 @@ namespace Fintech
         [OperationContract]
         List<ProductInfo> GetAllProduct(int IdObject);
 
+
+        [OperationContract]
+        string LoadImage(int Id, byte[] Buffer, string Extension);
     }
 }
