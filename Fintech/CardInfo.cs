@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Web;
 
 namespace Fintech
 {
     [DataContract]
-    public class LogInfo
+    public class CardInfo
     {
         [DataMember]
-        public string password { get; set; }
-
+        public int id { get; set; }
 
         [DataMember]
-        public int id { get; set; }
+        public string cardNumber { get; set; }
+
     }
 }

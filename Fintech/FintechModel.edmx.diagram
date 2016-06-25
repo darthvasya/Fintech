@@ -5,11 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="abb98e60354542758fa6e009bfd8b651" Name="Diagram1" ZoomLevel="81">
-        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.CategoryInfo" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.ObjectInfo" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.Cards" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.CategoryInfo" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.Image" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.ObjectInfo" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.OrderInfo" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.ProductInfo" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.Users" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.ProductInfo" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.sysdiagrams" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9FFBF4_FintechModel.Users" Width="1.5" PointX="6.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

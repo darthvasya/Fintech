@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
- 
+
 using System.Text;
 
 namespace Fintech
@@ -27,15 +27,39 @@ namespace Fintech
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
                                     RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
-                                    UriTemplate = "AddUser/")]
-        string AddNewUser(Users newUser);
+                                    UriTemplate = "Register/")]
+        int Register(Users newUser);
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
                                     RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
-                                    UriTemplate = "login/")]
-        string Login(LogInfo logInfo);
+                                    UriTemplate = "Login/")]
+        bool Login(LogInfo logInfo);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+                                    RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "AddCard/")]
+        bool AddCard(Cards newCard);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "Shops/{id}")]
+        ShopInfo GetShopInfo(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "Cards/{id}")]
+        List<CardInfo> GetUserCards(string id);
+
+        /*[OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "Shops/{shopId}/Goods/}")]
+        List<ProductInfo> GetShopGoods(string shopId);*/
     }
 }

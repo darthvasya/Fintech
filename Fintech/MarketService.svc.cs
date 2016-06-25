@@ -54,6 +54,28 @@ namespace Fintech
             else { answer = "Неверный пароль."; }
             return answer;
         }
+        // ИЗМЕНЕНИЕ ОБЪЕКТА
+        public string ChangeObject(string Card, string Password, string PasswordNew, string Name, string Address, string Description, string Image)
+        {
+            string result = "ok";
+            try
+            {
+                ObjectInfo OI = context.ObjectInfo.Where(p => p.Card == Card).Where(p => p.Password == Password).FirstOrDefault();
+                if (OI != null)
+                {
+                    // изменяем
+                    if (PasswordNew != null) if (MarketMethod.CheckPassword(PasswordNew)) { OI.Password = PasswordNew; }
+                    OI.Name = Name;
+                    OI.Address = Address;
+                    OI.Description = Description;
+                    OI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
+                    context.SaveChanges();
+                }
+                else { result = "Категория не найдена."; }
+            }
+            catch (Exception E) { result = E.Message; }
+            return result;
+        }
         // ДАННЫЕ ОБЪЕКТА
         public ObjectInfo GetObject(string Card, string Password)
         {
@@ -72,7 +94,7 @@ namespace Fintech
             return OI;
         }
         // ДОБАВЛЕНИЕ КАТЕГОРИИ
-        public string AddCategory(int IdObject, string Name, string Link, string Description)
+        public string AddCategory(int IdObject, string Name, string Image, string Description)
         {
             string result = "ok";
             try
@@ -80,7 +102,7 @@ namespace Fintech
                 CategoryInfo CI = new CategoryInfo();
                 CI.IdObject = IdObject;
                 CI.Name = Name;
-                CI.Image = Encoding.UTF8.GetBytes(Link);
+                CI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
                 CI.Description = Description;
                 context.CategoryInfo.Add(CI);
                 context.SaveChanges();
@@ -89,7 +111,7 @@ namespace Fintech
             return result;
         }
         // ИЗМЕНЕНИЕ КАТЕГОРИИ
-        public string ChangeCategory(int Id, int IdObject, string Name, string Link, string Description)
+        public string ChangeCategory(int Id, int IdObject, string Name, string Image, string Description)
         {
             string result = "ok";
             try
@@ -99,7 +121,7 @@ namespace Fintech
                 {
                     // изменяем
                     CI.Name = Name;
-                    CI.Image = Encoding.UTF8.GetBytes(Link);
+                    CI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
                     CI.Description = Description;
                     context.SaveChanges();
                 }
@@ -134,7 +156,7 @@ namespace Fintech
             return CIList;
         }
         // ДОБАВЛЕНИЕ ТОВАРА
-        public string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Link, string Description)
+        public string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description)
         {
             string result = "ok";
             try
@@ -144,7 +166,8 @@ namespace Fintech
                 PI.IdCategory = IdCategory;
                 PI.Name = Name;
                 PI.Price = Price;
-                PI.Image = Encoding.UTF8.GetBytes(Link);
+                PI.Currency = Currency;
+                PI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
                 PI.Description = Description;
                 context.ProductInfo.Add(PI);
                 context.SaveChanges();
@@ -153,7 +176,7 @@ namespace Fintech
             return result;
         }
         // ИЗМЕНЕНИЕ ТОВАРА
-        public string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Link, string Description)
+        public string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description)
         {
             string result = "ok";
             try
@@ -165,7 +188,8 @@ namespace Fintech
                     PI.IdCategory = IdCategory;
                     PI.Name = Name;
                     PI.Price = Price;
-                    PI.Image = Encoding.UTF8.GetBytes(Link);
+                    PI.Currency = Currency;
+                    PI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
                     PI.Description = Description;
                     context.SaveChanges();
                 }

@@ -10,16 +10,13 @@
 namespace Fintech
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ObjectInfo
+    public partial class sp_helpdiagrams_Result
     {
-        public int Id { get; set; }
-        public string Card { get; set; }
-        public string Password { get; set; }
+        public string Database { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> IdImage { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

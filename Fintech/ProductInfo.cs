@@ -19,7 +19,8 @@ namespace Fintech
         public Nullable<int> IdCategory { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public byte[] Image { get; set; }
+        public string Currency { get; set; }
+        public Nullable<int> IdImage { get; set; }
         public string Description { get; set; }
     }
 }

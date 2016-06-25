@@ -12,14 +12,12 @@ namespace Fintech
     using System;
     using System.Collections.Generic;
     
-    public partial class ObjectInfo
+    public partial class sysdiagrams
     {
-        public int Id { get; set; }
-        public string Card { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> IdImage { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

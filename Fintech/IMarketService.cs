@@ -12,19 +12,22 @@ namespace Fintech
     public interface IMarketService
     {
         [OperationContract]
-        string CreateObject(string card, string password, string name);
+        string CreateObject(string Card, string Password, string Name);
 
         [OperationContract]
-        string CheckObject(string card, string password);
+        string CheckObject(string Card, string Password);
 
         [OperationContract]
-        ObjectInfo GetObject(string card, string password);
+        string ChangeObject(string Card, string Password, string PasswordNew, string Name, string Address, string Description, string Image);
 
         [OperationContract]
-        string AddCategory(int IdObject, string Name, string Link, string Description);
+        ObjectInfo GetObject(string Card, string Password);
 
         [OperationContract]
-        string ChangeCategory(int Id, int IdObject, string Name, string Link, string Description);
+        string AddCategory(int IdObject, string Name, string Image, string Description);
+
+        [OperationContract]
+        string ChangeCategory(int Id, int IdObject, string Name, string Image, string Description);
 
         [OperationContract]
         string RemoveCategory(int Id, int IdObject);
@@ -33,10 +36,10 @@ namespace Fintech
         List<CategoryInfo> GetAllCategory(int IdObject);
 
         [OperationContract]
-        string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Link, string Description);
+        string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description);
 
         [OperationContract]
-        string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Link, string Description);
+        string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description);
 
         [OperationContract]
         string RemoveProduct(int Id, int IdObject);
