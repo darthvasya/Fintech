@@ -1,0 +1,14 @@
+<section>
+
+  <div class="panel panel-default bagItem" ng-repeat="shop in shops"  style="margin-left: -40px; width: 130%;">
+    <a href="#/categorys" style="text-decoration: none; color: inherit;">
+      <div class="panel-body">
+        <img class="headImage" ng-src="http://vasya18-001-site1.dtempurl.com/{{shop.imageUrl}}" alt=""  width="100%"/>
+        <h3><span ng-bind="shop.name"></span></h3>
+        <button type="button" class="btn btn-default" name="button">Подробнее</button>
+      </div>
+    </a>
+  </div>
+
+
+</section>

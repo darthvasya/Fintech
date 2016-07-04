@@ -18,16 +18,16 @@ namespace Fintech
         string CheckObject(string Card, string Password);
 
         [OperationContract]
-        string ChangeObject(string Card, string Password, string PasswordNew, string Name, string Address, string Description, string Image);
+        string ChangeObject(string Card, string Password, string PasswordNew, string Name, string Address, string Description, int IdImage);
 
         [OperationContract]
         ObjectInfo GetObject(string Card, string Password);
 
         [OperationContract]
-        string AddCategory(int IdObject, string Name, string Image, string Description);
+        string AddCategory(int IdObject, string Name, int IdImage, string Description);
 
         [OperationContract]
-        string ChangeCategory(int Id, int IdObject, string Name, string Image, string Description);
+        string ChangeCategory(int Id, int IdObject, string Name, int IdImage, string Description);
 
         [OperationContract]
         string RemoveCategory(int Id, int IdObject);
@@ -36,10 +36,10 @@ namespace Fintech
         List<CategoryInfo> GetAllCategory(int IdObject);
 
         [OperationContract]
-        string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description);
+        string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Currency, int IdImage, string Description);
 
         [OperationContract]
-        string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description);
+        string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Currency, int IdImage, string Description);
 
         [OperationContract]
         string RemoveProduct(int Id, int IdObject);
@@ -49,6 +49,20 @@ namespace Fintech
 
 
         [OperationContract]
-        string LoadImage(int Id, byte[] Buffer, string Extension);
+        Image LoadImage(int Id, byte[] Buffer, string Extension);
+
+        [OperationContract]
+        Image GetImage(int Id);
+
+        [OperationContract]
+        string RemoveImage(int Id);
+
+
+        [OperationContract]
+        List<OrderInfo> GetAllOrder(int IdObject);
+
+        [OperationContract]
+        string ChangeOrder(int Id, int IdObject, byte AsseptStatus, byte DeliveryStatus, string DeliveryTime);
+
     }
 }

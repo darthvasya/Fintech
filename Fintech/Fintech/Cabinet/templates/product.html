@@ -1,0 +1,10 @@
+<section style="width: 130%; margin-left: -40px;">
+  <h1 style="letter-spacing: 0.1em;"  ng-bind="product.Name">Очень длинное название продукта</h1>
+  <hr class="firstHR" style="width: 130% !important;">
+  <!-- {{product.ImageUrl}} -->
+  <img src="http://vasya18-001-site1.dtempurl.com{{product.ImageUrl}}" width="100%"/>
+  <h3 style="margin-left: 10px;">Цена: <strong ng-bind="product.Price"></strong> <strong ng-bind="products[productId].Currency"></strong></h3>
+  <p style="margin-left: 10px;" ng-bind="product.Description">  </p>
+
+  <button style="margin-left: 10px;" type="button" name="button" class="btn btn-default" ng-click="addToBag()">В корзину</button>
+</section>

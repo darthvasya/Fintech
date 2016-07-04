@@ -74,6 +74,9 @@ namespace Fintech
             UriTemplate = "Shops/{shopId}/Categories/{catId}/Goods/{goodId}/")]
         Good GetGood(string shopId, string catId, string goodId);
 
+        
+
+
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
                                     RequestFormat = WebMessageFormat.Json,
@@ -97,7 +100,7 @@ namespace Fintech
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
                                     ResponseFormat = WebMessageFormat.Json,
-                                    UriTemplate = "GetShopList/")]
+                                    UriTemplate = "getShopList/")]
         List<Shop> GetShopList();
 
         [OperationContract]
@@ -112,5 +115,18 @@ namespace Fintech
                                     ResponseFormat = WebMessageFormat.Json,
                                     UriTemplate = "GetOrderStatus/{orderId}/{operationId}/")]
         string GetOrderStatus(string orderId, string operationId);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json,
+                                    ResponseFormat = WebMessageFormat.Json,
+                                    UriTemplate = "updatedShop/{id}")]
+        bool sayToLexa(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare,
+                            RequestFormat = WebMessageFormat.Json,
+                            ResponseFormat = WebMessageFormat.Json,
+                            UriTemplate = "ordersInfo/")]
+        List<OrderInfo> getOrders(List<int> ordersId);
     }
 }

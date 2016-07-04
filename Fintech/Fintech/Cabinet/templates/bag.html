@@ -1,0 +1,14 @@
+<section id="bag">
+  <h1>Bag</h1>
+  <h3>Cost: 330$</h3>
+  <button type="button" class="btn btn-default" name="button" ng-click="makeOrder()">Оформить заказ</button>
+  <hr>
+  <div class="panel panel-default bagItem" ng-repeat="order in orderInfo">
+    <div class="panel-body">
+      <h3>Номер продукта: <span ng-bind="order.Id"></span></h3>
+      <h5>Магазин: <span></span></h5>
+      <h4>Cost: <span ng-bind="order.Price"></span></h4>
+      <button type="button" class="btn btn-default btnX" name="button">Delete</button>
+    </div>
+  </div>
+</section>

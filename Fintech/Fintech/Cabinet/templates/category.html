@@ -1,0 +1,17 @@
+<section id="category">
+  <h1 style="letter-spacing: 0.2em;">Печеньки</h1>
+  <hr class="firstHR">
+
+  <div class="panel panel-default" style="width: 130%; margin-left: -40px;" ng-repeat="product in products">
+   <a href="#/products/{{categoryId}}/{{product.Id}}" style="text-decoration: none; color: black;">
+    <div class="panel-body" >
+      <!-- <img  width="124" height="124" alt="" /> -->
+      <h3 style="margin-top: 0px;" ng-bind="product.Name">Печенька</h3>
+      <!--  -->
+      <img ng-src="http://vasya18-001-site1.dtempurl.com/{{product.ImageUrl}}" alt=""  width="100%"/>
+      <h4>Price: <strong ng-bind="product.Price"></strong> <strong ng-bind="product.Currency"></strong> 120$</h4>
+      <button type="button" name="button" class="btn btn-default" style="float: right;">В корзину</button>
+    </div>
+   </a>
+  </div>
+</section>

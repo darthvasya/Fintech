@@ -6,7 +6,6 @@ using System.ServiceModel;
 using System.Text;
 
 using System.IO;
-using System.Net.Sockets;
 
 namespace Fintech
 {
@@ -16,17 +15,17 @@ namespace Fintech
     {
         DB_9FFBF4_FintechEntities context = new DB_9FFBF4_FintechEntities();
         // РЕГИСТРАЦИЯ ОБЪЕКТА
-        public string CreateObject(string card, string password, string name)
+        public string CreateObject(string Card, string Password, string Name)
         {
             string result = "Неизвестная ошибка.";
-            if (MarketMethod.CheckPassword(password) == true)
+            if (MarketMethod.CheckPassword(Password) == true)
             {
                 try
                 {
                     ObjectInfo OI = new ObjectInfo();
-                    OI.Card = card;
-                    OI.Password = password;
-                    OI.Name = name;
+                    OI.Card = Card;
+                    OI.Password = Password;
+                    OI.Name = Name;
                     context.ObjectInfo.Add(OI);
                     context.SaveChanges();
                     result = "ok";
@@ -58,7 +57,7 @@ namespace Fintech
             return answer;
         }
         // ИЗМЕНЕНИЕ ОБЪЕКТА
-        public string ChangeObject(string Card, string Password, string PasswordNew, string Name, string Address, string Description, string Image)
+        public string ChangeObject(string Card, string Password, string PasswordNew, string Name, string Address, string Description, int IdImage)
         {
             string result = "ok";
             try
@@ -71,7 +70,7 @@ namespace Fintech
                     OI.Name = Name;
                     OI.Address = Address;
                     OI.Description = Description;
-                    OI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
+                    OI.IdImage = IdImage;
                     context.SaveChanges();
                 }
                 else { result = "Категория не найдена."; }
@@ -97,7 +96,7 @@ namespace Fintech
             return OI;
         }
         // ДОБАВЛЕНИЕ КАТЕГОРИИ
-        public string AddCategory(int IdObject, string Name, string Image, string Description)
+        public string AddCategory(int IdObject, string Name, int IdImage, string Description)
         {
             string result = "ok";
             try
@@ -105,7 +104,7 @@ namespace Fintech
                 CategoryInfo CI = new CategoryInfo();
                 CI.IdObject = IdObject;
                 CI.Name = Name;
-                CI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
+                CI.IdImage = IdImage;
                 CI.Description = Description;
                 context.CategoryInfo.Add(CI);
                 context.SaveChanges();
@@ -114,7 +113,7 @@ namespace Fintech
             return result;
         }
         // ИЗМЕНЕНИЕ КАТЕГОРИИ
-        public string ChangeCategory(int Id, int IdObject, string Name, string Image, string Description)
+        public string ChangeCategory(int Id, int IdObject, string Name, int IdImage, string Description)
         {
             string result = "ok";
             try
@@ -124,7 +123,7 @@ namespace Fintech
                 {
                     // изменяем
                     CI.Name = Name;
-                    CI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
+                    CI.IdImage = IdImage;
                     CI.Description = Description;
                     context.SaveChanges();
                 }
@@ -159,7 +158,7 @@ namespace Fintech
             return CIList;
         }
         // ДОБАВЛЕНИЕ ТОВАРА
-        public string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description)
+        public string AddProduct(int IdObject, int IdCategory, string Name, decimal Price, string Currency, int IdImage, string Description)
         {
             string result = "ok";
             try
@@ -170,7 +169,7 @@ namespace Fintech
                 PI.Name = Name;
                 PI.Price = Price;
                 PI.Currency = Currency;
-                PI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
+                PI.IdImage = IdImage;
                 PI.Description = Description;
                 context.ProductInfo.Add(PI);
                 context.SaveChanges();
@@ -179,7 +178,7 @@ namespace Fintech
             return result;
         }
         // ИЗМЕНЕНИЕ ТОВАРА
-        public string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Currency, string Image, string Description)
+        public string ChangeProduct(int Id, int IdObject, int IdCategory, string Name, decimal Price, string Currency, int IdImage, string Description)
         {
             string result = "ok";
             try
@@ -192,7 +191,7 @@ namespace Fintech
                     PI.Name = Name;
                     PI.Price = Price;
                     PI.Currency = Currency;
-                    PI.IdImage = 0; // ПОТОМ СДЕЛАТЬ ФОТКУ
+                    PI.IdImage = IdImage;
                     PI.Description = Description;
                     context.SaveChanges();
                 }
@@ -229,36 +228,82 @@ namespace Fintech
 
 
         // ЗАГРУЗКА ФОТО
-        public string LoadImage(int Id, byte[] Buffer, string Extension)
+        private string ServerDirectory = "h:/root/home/vasya18-001/www/site1";
+        public Image LoadImage(int Id, byte[] Buffer, string Extension)
         {
-            string result = "Неизвестная ошибка.";
+            Image result = null;
             if (Extension == "jpg" || Extension == "jpeg" || Extension == "png")
             {
                 try
                 {
                     Image Img = null;
-                    if (Id >= 0)
+                    if (Id > 0)
                     {
                         Img = context.Image.Where(p => p.Id == Id).FirstOrDefault();
                     }
                     if (Img == null)
                     { // создаём
                         Img = new Image();
-                        int ImageId = 1; try { ImageId = context.Image.LastOrDefault().Id + 1; } catch { }
-                        Img.ImageString = "\\ImageStorage\\" + ImageId + "." + Extension;
+                        int ImageId = 1; try { ImageId = context.Image.ToList().LastOrDefault().Id + 1; } catch { }
+                        Img.ImageString = "/ImageStorage/" + ImageId + "." + Extension;
                         Img.Ext = Extension;
                         context.Image.Add(Img);
                         context.SaveChanges();
                     }
                     // путь
-                    if (Directory.Exists("\\ImageStorage") == false) { Directory.CreateDirectory("\\ImageStorage"); }
+                    if (Directory.Exists(ServerDirectory + "\\ImageStorage") == false)
+                    { Directory.CreateDirectory(ServerDirectory + "\\ImageStorage"); }
                     // создаём файл
-                    File.WriteAllBytes(Img.ImageString, Buffer);
-                    result = "ok";
+                    File.WriteAllBytes(ServerDirectory + "\\" + Img.ImageString, Buffer);
+                    result = Img;
                 }
-                catch (Exception E) { result = E.Message; }
+                catch { }// (Exception E) { result = E.Message; }
             }
             return result;
         }
+        // ПОЛУЧЕНИЕ ФОТО
+        public Image GetImage(int Id)
+        {
+            Image Img = null;
+            try { Img = context.Image.Where(p => p.Id == Id).FirstOrDefault(); } catch { }
+            return Img;
+        }
+        // УДАЛЕНИЕ ФОТО
+        public string RemoveImage(int Id)
+        {
+            string result = "ok";
+            try { context.Image.Remove(GetImage(Id)); } catch (Exception E) { result = E.Message; }
+            return result;
+        }
+
+        // ПОЛУЧЕНИЕ ВСЕХ ЗАКАЗОВ
+        public List<OrderInfo> GetAllOrder(int IdObject)
+        {
+            List<OrderInfo> OIList = null;
+            try { OIList = context.OrderInfo.Where(p => p.IdObject == IdObject).ToList(); } catch { }
+            return OIList;
+        }
+        // ИЗМЕНЕНИЕ ЗАКАЗА
+        public string ChangeOrder(int Id, int IdObject, byte AcceptStatus, byte DeliveryStatus, string DeliveryTime)
+        {
+            string result = "ok";
+            try
+            {
+                OrderInfo OI = context.OrderInfo.Where(p => p.IdObject == IdObject).Where(p => p.Id == Id).FirstOrDefault();
+                if (OI != null)
+                {
+                    // изменяем
+                    OI.AcceptStatus = AcceptStatus;
+                    OI.DeliveryStatus = DeliveryStatus;
+                    OI.DeliveryTime = DeliveryTime;
+                    context.SaveChanges();
+                }
+                else { result = "Заказ не найден."; }
+            }
+            catch (Exception E) { result = E.Message; }
+            return result;
+        }
+
+
     }
 }

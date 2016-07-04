@@ -1,0 +1,12 @@
+<h1 style="letter-spacing: 0.2em; margin-left: -10px;">Категории</h1>
+<hr class="firstHR">
+<!--  -->
+<div class="panel panel-default" style="width: 130%; margin-left: -40px;" ng-repeat="category in categories">
+ <a href="#/category/{{category.id}}" style="color: black; text-decoration: none;">
+  <div class="panel-body">
+    <img ng-src="http://vasya18-001-site1.dtempurl.com/{{category.ImageUrl}}" width="100%"/>
+    <h4><span ng-bind="category.Name">Category name</span></h4>
+    <button type="button" name="button" class="btn btn-default">Подробнее</button>
+  </div>
+ </a>
+</div>

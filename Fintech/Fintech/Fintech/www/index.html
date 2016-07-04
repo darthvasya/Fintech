@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="Login/css/master.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+          <h1>Register</h1>
+      </div>
+    </nav>
+
+<section ng-controller="authController">
+
+  <article id="register" ng-show="!isRegister">
+
+  <form name="answerForm">
+    <div class="input-group input-group-lg input-field first">
+      <input type="text" class="form-control" placeholder="Login" ng-model="answer.login" required>
+    </div>
+
+    <div class="input-group input-group-lg input-field first">
+      <input type="password" class="form-control" placeholder="Password" ng-model="answer.password" required>
+    </div>
+
+    <div class="input-group input-group-lg input-field logBtn">
+      <input type="submit" class="form-control btn btn-default" value="Register" ng-click="register(answer, answerForm)">
+    </div>
+  </form>
+  <h4 ng-bind="message"></h4>
+  </article>
+
+  <article id="enterSection" ng-show="isRegister">
+    <form name="enterForm">
+      <div class="input-group input-group-lg input-field first">
+        <input type="password" class="form-control" placeholder="Password" ng-model="enter.password" required>
+      </div>
+
+      <div class="input-group input-group-lg input-field logBtn">
+        <input type="submit" class="form-control btn btn-default" value="Enter" ng-click="login(enter, enterForm)">
+      </div>
+    </form>
+    <h4 ng-bind="message"></h4>
+  </article>
+
+  <!-- <article id="goregister">
+    <h3>If you are already registered, sign in</h3>
+    <div class="input-group input-group-lg input-field logBtn">
+      <input type="button" class="form-control btn btn-default" value="Sign In">
+    </div>
+  </article>
+   -->
+</section>
+
+
+
+
+
+
+
+
+
+
+    <script src="node_modules/angular/angular.js" charset="utf-8"></script>
+    <script src="node_modules/angular-route/angular-route.js" charset="utf-8"></script>
+
+    <script src="app.js" charset="utf-8"></script>
+    <script src="Login/Controllers/authController.js" charset="utf-8"></script>
+  </body>
+</html>

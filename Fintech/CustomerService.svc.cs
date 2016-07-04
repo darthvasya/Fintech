@@ -182,14 +182,14 @@ namespace Fintech
                 int int_catId = Int32.Parse(catId);
                 int int_goodId = Int32.Parse(goodId);
 
-                ProductInfo good = context.ProductInfo.Where(p => p.IdCategory == int_catId).FirstOrDefault();
+                ProductInfo good = context.ProductInfo.Find(int_goodId);
                 Good result = new Good();
                 Image image = context.Image.Where(p => p.Id == good.IdImage).FirstOrDefault();
                 result.ImageUrl = image.ImageString;
                 result.CatId = int_catId;
                 result.Currency = good.Currency;
                 result.Description = good.Description;
-                result.Id = good.Id;
+                result.Id = Convert.ToInt32(goodId);
                 result.Price = good.Price;
                 result.Name = good.Name;
                 result.ShopId = good.IdObject;
@@ -201,13 +201,15 @@ namespace Fintech
             }
         }
 
+
         public string MakeOrder(Order order)
         {
+            
             OrderInfo orderInfo = new OrderInfo();
             orderInfo.IdObject = order.ShopId;
             orderInfo.AcceptStatus = 0;
             orderInfo.DeliveryStatus = 0;
-            orderInfo.PaymentStatus = 0;
+            orderInfo.PaymentStatus = 1;
             orderInfo.CardId = order.CardId;
             orderInfo.GoodsId = formStringWithGoodsId(order.GoodsId);
             int tempOrderId = order.GoodsId[0];
@@ -215,10 +217,15 @@ namespace Fintech
             orderInfo.Currency = tempGood.Currency;
             orderInfo.CreationTime = order.OrderTime;
             orderInfo.DeliveryTime = "";
+            Random rnd = new Random();
+            orderInfo.SecretCode = rnd.Next(100000000, 1000000000);
             context.OrderInfo.Add(orderInfo);
             context.SaveChanges();
-            sendOrderChangeSignal(orderInfo.Id);
-            return "Ваш заказ поставлен в очередь.";
+            updatedShopId.Add(order.ShopId);
+            
+
+            //sendOrderChangeSignal(Convert.ToInt32(orderInfo.Id));
+            return orderInfo.SecretCode.ToString();
         }
 
         private string formStringWithGoodsId(List<int> ids)
@@ -254,6 +261,19 @@ namespace Fintech
             sendOrderChangeSignal(orderInfo.Id);
         }
 
+        List<int> updatedShopId = new List<int>();
+        public bool sayToLexa(string id)
+        {
+            bool answer = false;
+            for (int i = 0; i < updatedShopId.Count; i++){
+                if (updatedShopId[i] == Convert.ToInt32(id)){
+                    updatedShopId.RemoveAt(i);
+                    answer = true;
+                    i--;
+                }
+            }
+            return answer;             
+        }
         public string GetOrderStatus(string orderId, string operationId)
         {
             int int_orderId = Int32.Parse(orderId);
@@ -302,7 +322,7 @@ namespace Fintech
 
         public List<Shop> GetShopList()
         {
-            List<ObjectInfo> shops = context.ObjectInfo.ToList();
+            List<ObjectInfo> shops = context.ObjectInfo.ToList<ObjectInfo>();
             List<Shop> result = new List<Shop>();
             foreach (ObjectInfo objectInfo in shops)
             {
@@ -317,5 +337,17 @@ namespace Fintech
             }
             return result;
         }
+
+        public List<OrderInfo> getOrders(List<int> ordersId)
+        {
+            List<OrderInfo> ordersList = new List<OrderInfo>();
+            for (int i = 0; i < ordersId.Count; i++)
+            {
+                ordersList.Add(context.OrderInfo.Find(ordersId[i]));
+            }
+            return ordersList;
+        }
+
+      
     }
 }

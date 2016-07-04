@@ -60,6 +60,7 @@
           <Property Name="PaymentStatus" Type="tinyint" Nullable="false" />
           <Property Name="DeliveryStatus" Type="tinyint" Nullable="false" />
           <Property Name="DeliveryTime" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SecretCode" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInfo">
           <Key>
@@ -243,6 +244,7 @@
           <Property Name="PaymentStatus" Type="Byte" Nullable="false" />
           <Property Name="DeliveryStatus" Type="Byte" Nullable="false" />
           <Property Name="DeliveryTime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SecretCode" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductInfo">
           <Key>
@@ -352,6 +354,7 @@
           <EntitySetMapping Name="OrderInfo">
             <EntityTypeMapping TypeName="DB_9FFBF4_FintechModel.OrderInfo">
               <MappingFragment StoreEntitySet="OrderInfo">
+                <ScalarProperty Name="SecretCode" ColumnName="SecretCode" />
                 <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
                 <ScalarProperty Name="DeliveryStatus" ColumnName="DeliveryStatus" />
                 <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />

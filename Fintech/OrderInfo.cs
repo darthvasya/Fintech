@@ -25,5 +25,6 @@ namespace Fintech
         public byte PaymentStatus { get; set; }
         public byte DeliveryStatus { get; set; }
         public string DeliveryTime { get; set; }
+        public long SecretCode { get; set; }
     }
 }

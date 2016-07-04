@@ -1,0 +1,21 @@
+/* #login */
+ .input-field {
+  margin-left: 10%;
+  width: 80%;
+}
+
+.first {
+  margin-bottom: 15px;
+}
+
+.logBtn {
+  margin-top: 20px;
+}
+/* end #login */
+
+/* #goregister */
+#goregister h3 {
+  margin-top: 40px;
+  text-align: center;
+}
+/* end #goregister */

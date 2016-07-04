@@ -1,0 +1,25 @@
+<section>
+  <h1>Adding card</h1>
+  <article id="addCard">
+    <form name="cardForm">
+      <div class="input-group input-group-lg input-field first">
+        <input type="text" class="form-control" placeholder="Card Number" ng-model="card.cardNumber" required>
+      </div>
+
+      <div class="input-group input-group-lg input-field first">
+        <input type="text" class="form-control" placeholder="Valid Date" ng-model="card.validDate" required>
+      </div>
+
+      <div class="input-group input-group-lg input-field first">
+        <input type="text" class="form-control" placeholder="Card Key" ng-model="card.cardKey" required>
+      </div>
+
+      <div class="input-group input-group-lg input-field logBtn">
+        <input type="submit" class="form-control btn btn-default" value="Add Card" ng-click="addcard(card, cardForm)">
+      </div>
+    </form>
+
+    </article>
+
+  </article>
+</section>

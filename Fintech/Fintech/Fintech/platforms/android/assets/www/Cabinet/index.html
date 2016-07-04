@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>side menu</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+
+	<script src="http://192.168.137.1:8080/socket.io/socket.io.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div id="sidebar">
+			<ul>
+				<li class="elem"><a href="#/home">Home</a></li>
+				<li class="elem"><a href="#/shops">Shops</a></li>
+				<li class="elem"><a href="#/bag">Bag</a></li>
+				<li class="elem"><a href="#/mycards">My cards</a></li>
+				<li class="elem"><a href="#/addcard">Add card</a></li>
+				<li class="elem"><a href="#/history">History</a></li>
+			</ul>
+		</div>
+		<div class="main-content">
+			<div class="swipe-area"></div>
+			<a href="" data-toggle=".container" id="sidebar-toggle">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</a>
+
+			<div class="content">
+			  <ng-view></ng-view>
+			</div>
+		</div>
+	</div>
+	<div ng-controller="messageController">
+		<input type="hidden" id="messageHub" name="name" ng-model="messageHub">
+		<script type="text/javascript">
+		var messageHub = document.getElementById('messageHub');
+		var socket = io.connect('http://192.168.137.1:8080');
+			socket.on('connect', function() {
+				socket.on('message', function(msg) {
+					console.log(msg);
+					localStorage['shop'] = msg;
+					messageHub.value = msg;
+					if(msg == 2) {
+						alert("Ваш заказ принят на выполнение. Ожидайте.");
+						console.log("Ваш заказ принят на выполнение. Ожидайте.");
+					} else if (msg == 3) {
+						alert("Заказ не принят.");
+						console.log("Заказ не принят.");
+					} else if(msg == 4) {
+						alert("Важ заказ выполнен. Код подтверждения " + localStorage['key']);
+						console.log("Важ заказ выполнен. Код подтверждения " + localStorage['key'] + "\n Вы можете его забрать в пункте выдачи #1.");
+						localStorage['key'] = "";
+					}
+					//console.log(messageHub.value);
+				});
+
+			});
+		</script>
+	</div>
+
+<!-- swipe -->
+  <script type="text/javascript" src="../node_modules/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../node_modules/jquery/jquery.touchSwipe.min.js"></script>
+	<script type="text/javascript" src="js/js.js"></script>
+<!-- End swipe -->
+
+	<script src="../node_modules/angular/angular.js" charset="utf-8"></script>
+	<script src="../node_modules/angular-route/angular-route.js" charset="utf-8"></script>
+
+	<script src="../app.js" charset="utf-8"></script>
+	<script src="controllers/cabinetController.js" charset="utf-8"></script>
+	<script src="controllers/bagController.js" charset="utf-8"></script>
+	<script src="controllers/messageController.js" charset="utf-8"></script>
+</body>
+</html>
